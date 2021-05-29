@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:susya/gps/gpsUtil.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:susya/remote_services/http.dart';
 
 class GPSPage extends StatelessWidget {
   const GPSPage({Key ?key}) : super(key: key);
@@ -29,8 +31,11 @@ class GPSPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                        onPressed: (){
-                          determinePosition();
+                        onPressed: ()async{
+                          Position coordinates = await determinePosition();
+                          double latitude = coordinates.latitude;
+                          double longitude = coordinates.longitude;
+                          coordinatePOST(latitude, longitude);
                           //Go to next page
                         },
                         child: Container(
