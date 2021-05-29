@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:susya/pages/result_page.dart';
-import 'package:susya/remote_services/http.dart';
+import 'package:susya/services/http.dart';
 import 'package:susya/widgets/login_button.dart';
 
 class ImagePreview extends StatefulWidget {
