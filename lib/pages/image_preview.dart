@@ -21,6 +21,10 @@ class _ImagePreviewState extends State<ImagePreview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Preview your image"),
+        backgroundColor: Colors.green,
+      ),
       body: Row(
         children: [
           Expanded(
@@ -46,11 +50,17 @@ class _ImagePreviewState extends State<ImagePreview> {
                     var result = await sendToPredictor(widget.imagePath);
                     final String plant = result['plant'];
                     final String disease = result['disease'];
+                    final String remedy = "RemedyValue";
+                    // final String remedy = result['remedy'];
                     print(result);
                     setState(() {
                       isLoading = false;
                     });
-                    Get.to(ResultPage(disease: disease, plant: plant));
+                    Get.to(() => ResultPage(
+                          disease: disease,
+                          plant: plant,
+                          remedy: remedy,
+                        ));
                   },
                 ),
                 isLoading

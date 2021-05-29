@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:susya/authentication/sign_in_button.dart';
 
 import 'camera/camera_page.dart';
 import 'widgets/login_button.dart';
@@ -34,10 +35,11 @@ class MyApp extends StatelessWidget {
                         color: Colors.green,
                         fontWeight: FontWeight.bold)),
                 Spacer(flex: 1),
-                LoginButton(
-                  title: "Login",
-                  onTap: () => Get.to(CameraPage()),
-                ),
+                // LoginButton(
+                //   title: "Login",
+                //   onTap: () => Get.to(() => CameraPage()),
+                // ),
+                SignInButton(),
                 Spacer(flex: 6)
               ],
             )),

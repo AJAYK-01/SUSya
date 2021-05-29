@@ -76,7 +76,7 @@ class _CameraPageState extends State<CameraPage> {
     if (image != null) {
       final String imagePath = image.path;
       print("Hurraayyy " + imagePath);
-      Get.to(ImagePreview(imagePath: imagePath));
+      Get.to(() => ImagePreview(imagePath: imagePath));
       // Navigator.push(
       //   context,
       //   MaterialPageRoute(
@@ -96,7 +96,7 @@ class _CameraPageState extends State<CameraPage> {
       picture.saveTo(imagePath);
 
       print("hurraahhh  : " + imagePath);
-      Get.to(ImagePreview(imagePath: imagePath));
+      Get.to(() => ImagePreview(imagePath: imagePath));
 
       // Navigator.push(
       //   context,
@@ -150,6 +150,17 @@ class _CameraPageState extends State<CameraPage> {
         child: CircularProgressIndicator(),
       ); // Otherwise, display a loading indicator.
     }
+
+    final size = MediaQuery.of(context).size;
+
+    // calculate scale depending on screen and camera ratios
+    // this is actually size.aspectRatio / (1 / camera.aspectRatio)
+    // because camera preview size is received as landscape
+    // but we're calculating for portrait orientation
+    var scale = size.aspectRatio * _controller.value.aspectRatio;
+
+    // to prevent scaling down, invert the value
+    if (scale < 1) scale = 1 / scale;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -157,8 +168,8 @@ class _CameraPageState extends State<CameraPage> {
           child: Stack(
             children: <Widget>[
               Container(
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
+                child: Transform.scale(
+                  scale: scale,
                   child: CameraPreview(_controller), //cameraPreview
                 ),
               ),

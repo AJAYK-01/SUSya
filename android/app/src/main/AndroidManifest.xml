@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.REQUEST_COMPANION_USE_DATA_IN_BACKGROUND" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
    <application
-        android:label="susya"
+        android:label="SUSya"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
