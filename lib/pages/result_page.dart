@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:susya/pdf/pdf_gen.dart';
+import 'package:susya/services/http.dart';
 import 'package:susya/widgets/login_button.dart';
 
 class ResultPage extends StatefulWidget {
@@ -76,6 +77,21 @@ class _ResultPageState extends State<ResultPage> {
               height: 16,
             ),
             LoginButton(
+                title: "Send Alert",
+                onTap: () async {
+                  await sendAlerts(
+                      plant: widget.plant, disease: widget.disease);
+                  Get.snackbar(
+                    "Success!",
+                    "The Alert has been sent to everyone",
+                    backgroundColor: Colors.white,
+                    duration: Duration(seconds: 8),
+                  );
+                }),
+            SizedBox(
+              height: 10,
+            ),
+            LoginButton(
                 title: "Make Report",
                 onTap: () async {
                   setState(() {
@@ -96,7 +112,7 @@ class _ResultPageState extends State<ResultPage> {
                       "Success!",
                       "The Crop Analysis Report has been generated and saved to Downloads folder",
                       backgroundColor: Colors.white,
-                      duration: Duration(seconds: 8),
+                      duration: Duration(seconds: 16),
                     );
                   }
                 }),

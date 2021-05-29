@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:susya/authentication/auth_class.dart';
 
 Future<Uint8List> getImageFileFromAssets(String path) async {
@@ -102,6 +103,12 @@ Future<bool> makeReport({plant, disease, remedy}) async {
         .replaceAll(' ', "_")
         .replaceAll(".", "_")
         .replaceAll(":", "_");
+
+    var directry = await getTemporaryDirectory();
+    var pathdir = directry.path;
+
+    // final file = File('$pathdir/Report_$name.pdf');
+    // Share.shareFiles([file.path]);
 
     final file = File('$dir/Report_$name.pdf');
     await file.writeAsBytes(await pdf.save());
