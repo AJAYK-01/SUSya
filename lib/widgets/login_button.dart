@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:susya/camera/camera_page.dart';
 
 class LoginButton extends StatelessWidget {
   final String title;
@@ -17,10 +15,10 @@ class LoginButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 45,
-        width: 120,
+        width: 140,
         child: Center(
             child: Text(title,
-                style: TextStyle(fontSize: 22, color: Colors.white))),
+                style: TextStyle(fontSize: 20, color: Colors.white))),
         decoration: BoxDecoration(
             color: Colors.green, borderRadius: BorderRadius.circular(26)),
       ),

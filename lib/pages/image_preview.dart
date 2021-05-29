@@ -50,8 +50,7 @@ class _ImagePreviewState extends State<ImagePreview> {
                     var result = await sendToPredictor(widget.imagePath);
                     final String plant = result['plant'];
                     final String disease = result['disease'];
-                    final String remedy = "RemedyValue";
-                    // final String remedy = result['remedy'];
+                    final String remedy = result['remedy'];
                     print(result);
                     setState(() {
                       isLoading = false;

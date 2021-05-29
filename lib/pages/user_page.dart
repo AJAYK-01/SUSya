@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:susya/authentication/auth_class.dart';
 import 'package:susya/camera/camera_page.dart';
 import 'package:susya/widgets/login_button.dart';

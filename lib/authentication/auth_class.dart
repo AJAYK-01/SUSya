@@ -5,6 +5,12 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication {
+  static User? currentUser;
+
+  static getCurrentUser() {
+    return currentUser;
+  }
+
   static Future<FirebaseApp> initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
 
@@ -53,6 +59,8 @@ class Authentication {
       }
     }
 
+    currentUser = user;
+
     return user;
   }
 
@@ -67,5 +75,7 @@ class Authentication {
         'Error signing out. Try again.',
       );
     }
+
+    currentUser = null;
   }
 }
