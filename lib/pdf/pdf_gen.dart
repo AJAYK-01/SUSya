@@ -38,82 +38,74 @@ Future<bool> makeReport({plant, disease, remedy}) async {
   Permission permission1 = await Permission.storage;
 
   var dir;
-  new Directory(downloads + '/SUSya').create(recursive: true)
-      // The created directory is returned as a Future.
-      .then((Directory directory) async {
-    dir = directory.path;
-    print('Path of New Dir: ' + directory.path);
-    final pdf = pw.Document();
+  final pdf = pw.Document();
 
-    pdf.addPage(
-      pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) => pw.Center(
-          child: pw.Column(
-              mainAxisAlignment: pw.MainAxisAlignment.center,
-              crossAxisAlignment: pw.CrossAxisAlignment.start,
-              children: [
-                pw.Spacer(flex: 3),
-                pw.Text("$dateTime"),
-                pw.Row(
-                    mainAxisAlignment: pw.MainAxisAlignment.center,
-                    crossAxisAlignment: pw.CrossAxisAlignment.center,
-                    children: [
-                      pw.Spacer(),
-                      pw.Text("SUSya",
-                          style: pw.TextStyle(
-                              color: PdfColors.green,
-                              fontSize: 40,
-                              fontWeight: pw.FontWeight.bold)),
-                      pw.Spacer(),
-                    ]),
-                pw.Spacer(flex: 2),
-                pw.Row(
-                    mainAxisAlignment: pw.MainAxisAlignment.center,
-                    crossAxisAlignment: pw.CrossAxisAlignment.center,
-                    children: [
-                      pw.Spacer(),
-                      pw.Text("Crop Analysis Report",
-                          style: pw.TextStyle(
-                              color: PdfColors.black,
-                              fontSize: 32,
-                              fontWeight: pw.FontWeight.bold,
-                              fontStyle: pw.FontStyle.italic)),
-                      pw.Spacer(),
-                    ]),
-                pw.Spacer(flex: 2),
-                pw.Text("Username: ${user.displayName}",
-                    style: pw.TextStyle(color: PdfColors.black, fontSize: 26)),
-                pw.SizedBox(height: 5),
-                pw.Text("Email: ${user.email}",
-                    style: pw.TextStyle(color: PdfColors.black, fontSize: 26)),
-                pw.SizedBox(height: 5),
-                pw.Text("Plant: $plant",
-                    style: pw.TextStyle(color: PdfColors.black, fontSize: 26)),
-                pw.SizedBox(height: 5),
-                pw.Text("Identified Disease: $disease",
-                    style: pw.TextStyle(color: PdfColors.black, fontSize: 26)),
-                pw.Spacer(flex: 6),
-              ]),
-        ),
+  pdf.addPage(
+    pw.Page(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) => pw.Center(
+        child: pw.Column(
+            mainAxisAlignment: pw.MainAxisAlignment.center,
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Spacer(flex: 3),
+              pw.Text("$dateTime"),
+              pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.center,
+                  crossAxisAlignment: pw.CrossAxisAlignment.center,
+                  children: [
+                    pw.Spacer(),
+                    pw.Text("SUSya",
+                        style: pw.TextStyle(
+                            color: PdfColors.green,
+                            fontSize: 40,
+                            fontWeight: pw.FontWeight.bold)),
+                    pw.Spacer(),
+                  ]),
+              pw.Spacer(flex: 2),
+              pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.center,
+                  crossAxisAlignment: pw.CrossAxisAlignment.center,
+                  children: [
+                    pw.Spacer(),
+                    pw.Text("Crop Analysis Report",
+                        style: pw.TextStyle(
+                            color: PdfColors.black,
+                            fontSize: 32,
+                            fontWeight: pw.FontWeight.bold,
+                            fontStyle: pw.FontStyle.italic)),
+                    pw.Spacer(),
+                  ]),
+              pw.Spacer(flex: 2),
+              pw.Text("Username: ${user.displayName}",
+                  style: pw.TextStyle(color: PdfColors.black, fontSize: 26)),
+              pw.SizedBox(height: 5),
+              pw.Text("Email: ${user.email}",
+                  style: pw.TextStyle(color: PdfColors.black, fontSize: 26)),
+              pw.SizedBox(height: 5),
+              pw.Text("Plant: $plant",
+                  style: pw.TextStyle(color: PdfColors.black, fontSize: 26)),
+              pw.SizedBox(height: 5),
+              pw.Text("Identified Disease: $disease",
+                  style: pw.TextStyle(color: PdfColors.black, fontSize: 26)),
+              pw.Spacer(flex: 6),
+            ]),
       ),
-    );
+    ),
+  );
 
-    String name = "${plant}_"
-        .replaceAll(' ', "_")
-        .replaceAll(".", "_")
-        .replaceAll(":", "_");
+  String name = "${plant}_${dateTime}_"
+      .replaceAll(' ', "_")
+      .replaceAll(".", "_")
+      .replaceAll(":", "_");
 
-    var directry = await getTemporaryDirectory();
-    var pathdir = directry.path;
+  var directry = await getTemporaryDirectory();
+  var pathdir = directry.path;
 
-    // final file = File('$pathdir/Report_$name.pdf');
-    // Share.shareFiles([file.path]);
+  final file = File('$pathdir/Report_$name.pdf');
+  final file2 = await file.writeAsBytes(await pdf.save());
+  print(file2.path);
+  Share.shareFiles([file.path]);
 
-    final file = File('$dir/Report_$name.pdf');
-    await file.writeAsBytes(await pdf.save());
-
-    return true;
-  });
   return true;
 }

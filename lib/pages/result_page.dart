@@ -107,14 +107,14 @@ class _ResultPageState extends State<ResultPage> {
                   });
                   print(result);
 
-                  if (result) {
-                    Get.snackbar(
-                      "Success!",
-                      "The Crop Analysis Report has been generated and saved to Downloads folder",
-                      backgroundColor: Colors.white,
-                      duration: Duration(seconds: 16),
-                    );
-                  }
+                  // if (result) {
+                  //   Get.snackbar(
+                  //     "Success!",
+                  //     "The Crop Analysis Report has been generated and saved to Downloads folder",
+                  //     backgroundColor: Colors.white,
+                  //     duration: Duration(seconds: 16),
+                  //   );
+                  // }
                 }),
             isLoading
                 ? Expanded(

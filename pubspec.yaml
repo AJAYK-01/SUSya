@@ -16,6 +16,7 @@ dependencies:
   firebase_auth: ^1.2.0
   firebase_core: ^1.2.0
   firebase_messaging: ^10.0.0
+  flutter_share_me: ^0.10.0
   get: ^4.1.4
   google_sign_in: ^5.0.4
   image_picker: ^0.7.5+3
